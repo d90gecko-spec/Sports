@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Outlaw 2027 Triathlon Strength Hub</title>
+    <!-- Web App Manifest & Home Screen Icons -->
+    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Outlaw+2027+Strength+Hub%22%2C%22short_name%22%3A%22OutlawStrength%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f4f5f7%22%2C%22theme_color%22%3A%22%23dc2626%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf-8%2C%253Csvg%2520xmlns%253D%2522http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2522%2520viewBox%253D%25220%25200%2520512%2520512%2522%253E%253Crect%2520width%253D%2522512%2522%2520height%253D%2522512%2522%2520rx%253D%2522112%2522%2520fill%253D%2522%2523dc2626%2522%252F%253E%253Ctext%2520x%253D%2522256%2522%2520y%253D%2522295%2522%2520font-family%253D%2522sans-serif%2522%2520font-weight%253D%2522800%2522%2520font-size%253D%2522150%2522%2520fill%253D%2522%2523ffffff%2522%2520text-anchor%253D%2522middle%2522%253EO27%253C%252Ftext%253E%253Ctext%2520x%253D%2522256%2522%2520y%253D%2522365%2522%2520font-family%253D%2522sans-serif%2522%2520font-weight%253D%2522700%2522%2520font-size%253D%252238%2522%2520fill%253D%2522%2523fca5a5%2522%2520text-anchor%253D%2522middle%2522%2520letter-spacing%253D%25224%2522%253ESTRENGTH%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D'>
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="%23dc2626"/><text x="256" y="295" font-family="sans-serif" font-weight="800" font-size="150" fill="%23ffffff" text-anchor="middle">O27</text></svg>'>
+    <link rel="apple-touch-icon" href='data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="%23dc2626"/><text x="256" y="295" font-family="sans-serif" font-weight="800" font-size="150" fill="%23ffffff" text-anchor="middle">O27</text></svg>'>
+    <meta name="theme-color" content="#dc2626">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f4f5f7;
+            --surface: #ffffff;
+            --surface-alt: #eceef2;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --border: #d1d5db;
+            --primary: #dc2626;
+            --primary-hover: #b91c1c;
+            --primary-light: rgba(220, 38, 38, 0.1);
+            --accent-amber: #d97706;
+            --accent-amber-light: rgba(217, 119, 6, 0.1);
+            --success: #16a34a;
+            --success-light: rgba(22, 163, 74, 0.1);
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --surface: #1e293b;
+            --surface-alt: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --primary: #ef4444;
+            --primary-hover: #dc2626;
+            --primary-light: rgba(239, 68, 68, 0.15);
+            --accent-amber: #f59e0b;
+            --accent-amber-light: rgba(245, 158, 11, 0.15);
+            --success: #22c55e;
+            --success-light: rgba(34, 197, 94, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 90px;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-title h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .header-title p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Toggle pill */
+        .deload-pill {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .deload-pill.active {
+            background: var(--accent-amber-light);
+            border-color: var(--accent-amber);
+            color: var(--accent-amber);
+        }
+
+        /* Main Container */
+        main {
+            padding: 16px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards & UI */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* TR Preview Banner */
+        .tr-banner {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .tr-banner h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .tr-banner p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Deload Notice Banner */
+        .deload-banner {
+            background: var(--accent-amber-light);
+            border: 1px solid var(--accent-amber);
+            border-left: 4px solid var(--accent-amber);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .deload-banner.visible {
+            display: block;
+        }
+        .deload-banner h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-amber);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .deload-banner p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* Workout Session Selector */
+        .session-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .session-tab {
+            flex: 1;
+            min-width: 100px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .session-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Exercise Item */
+        .exercise-item {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .exercise-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .exercise-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .exercise-notes {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        /* Sets tracker */
+        .sets-grid {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .set-btn {
+            flex: 1;
+            min-width: 44px;
+            height: 38px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .set-btn.completed {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .set-btn span {
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+
+        /* Rest Timer Floating Bar */
+        .timer-bar {
+            position: fixed;
+            bottom: 70px;
+            left: 16px;
+            right: 16px;
+            max-width: 568px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+            transform: translateY(120%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timer-bar.active {
+            transform: translateY(0);
+        }
+
+        .timer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .timer-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: var(--surface-alt);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        /* Routine 1 Section & Interactive Modal/Widget */
+        .routine1-box {
+            background: var(--surface);
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .routine1-box h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .routine1-box p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checklist-item.done span {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        /* Routine 1 Timer Modal Overlay */
+        .routine-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            display: none;
+        }
+
+        .routine-modal.active {
+            display: flex;
+        }
+
+        .routine-modal-card {
+            background: var(--surface);
+            width: 100%;
+            max-width: 420px;
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .routine-timer-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 16px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .routine-current-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .routine-status-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .routine-next-preview {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            background: var(--surface-alt);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .routine-modal-controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        /* Bottom Navigation Bar */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 101;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0;
+            gap: 2px;
+            transition: color 0.2s;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Weekly Plan & Roadmap styling */
+        .plan-day {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .plan-day-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .plan-day-content {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .roadmap-month {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .roadmap-month h3 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        /* Settings Form */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>Outlaw 2027 Strength Hub</h1>
+            <p>Triathlon Conditioning & Injury Prevention</p>
+        </div>
+        <div class="header-controls">
+            <button class="deload-pill" id="deloadPill" onclick="toggleDeload()">
+                <span>⚡ Deload: OFF</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- TAB 1: WORKOUTS -->
+        <div id="tab-workouts" class="tab-content active">
+            <div class="tr-banner" id="trBanner">
+                <h3>TrainerRoad Today</h3>
+                <p id="trTodayText">Loading calendar sync...</p>
+            </div>
+
+            <div class="deload-banner" id="deloadBanner">
+                <h3>Recovery Week Active</h3>
+                <p>Heavy gym lifting is paused this week. Focus on easy mobility, sleep, and absorption of endurance volume. Routine 1 can be done at 50% effort.</p>
+            </div>
+
+            <div class="session-tabs">
+                <div class="session-tab active" onclick="switchSession(1)" id="stab-1">Session 1 (Mon)</div>
+                <div class="session-tab" onclick="switchSession(2)" id="stab-2">Session 2 (Tue)</div>
+                <div class="session-tab" onclick="switchSession(3)" id="stab-3">Session 3 (Thu)</div>
+            </div>
+
+            <div id="workoutContainer">
+                <!-- Dynamically populated workout blocks -->
+            </div>
+        </div>
+
+        <!-- TAB 2: WEEKLY PLAN -->
+        <div id="tab-weekly" class="tab-content">
+            <div class="card">
+                <h2>Weekly Structure</h2>
+                <p>Optimized for 3 deadlift-free strength sessions integrated with your TrainerRoad bike/run plan.</p>
+                <div id="weeklyPlanContainer">
+                    <!-- Populated dynamically based on custom gym days -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ROADMAP -->
+        <div id="tab-roadmap" class="tab-content">
+            <div class="card">
+                <h2>8-Month Periodization Roadmap</h2>
+                <p>Progression leading up to Outlaw Triathlon July 2027.</p>
+                
+                <div class="roadmap-month">
+                    <h3>Winter Base (Nov - Jan)</h3>
+                    <p>Build unilateral stability, posterior chain resilience, and upper back posture. 3 strength sessions/week.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Spring Build (Feb - Apr)</h3>
+                    <p>Transition to 2 strength sessions/week. Focus on force transfer and knee/ankle durability for long runs.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Specialty & Peak (May - Jun)</h3>
+                    <p>Maintenance mode (1-2 short sessions/week). Prioritize race-pace specificity, taper freshness, and recovery.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Race Month (July 2027)</h3>
+                    <p>Outlaw Race execution. Zero heavy lifting in race week; mobility & activation only.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SETTINGS -->
+        <div id="tab-settings" class="tab-content">
+            <div class="card">
+                <h2>Gym Strength Days</h2>
+                <p>Configure which days of the week you perform your 3 strength sessions.</p>
+                
+                <div class="form-group">
+                    <label for="gymDay1">Session 1 Day</label>
+                    <select id="gymDay1" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gymDay2">Session 2 Day</label>
+                    <select id="gymDay2" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday" selected>Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gymDay3">Session 3 Day</label>
+                    <select id="gymDay3" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday" selected>Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Data & Sync</h2>
+                <p>Manage app cache, rest timer settings, and TrainerRoad ICS integration.</p>
+                <div class="form-group">
+                    <label for="icsUrl">TrainerRoad ICS URL / Calendar Feed</label>
+                    <input type="text" id="icsUrl" placeholder="https://app.trainerroad.com/calendar/..." onchange="saveICSUrl()">
+                </div>
+                <button class="btn" onclick="syncCalendar()">Sync Now</button>
+                <button class="btn btn-secondary" onclick="resetAppData()" style="margin-left: 8px;">Reset Progress</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rest Timer Floating Bar -->
+    <div class="timer-bar" id="timerBar">
+        <div class="timer-info">
+            <div>
+                <div class="timer-label" id="timerLabel">Rest Timer</div>
+                <div class="timer-display" id="timerDisplay">01:30</div>
+            </div>
+        </div>
+        <div class="timer-actions">
+            <button class="btn btn-secondary" onclick="adjustTimer(-15)">-15s</button>
+            <button class="btn" onclick="adjustTimer(15)">+15s</button>
+            <button class="btn btn-secondary" onclick="stopTimer()">Stop</button>
+        </div>
+    </div>
+
+    <!-- Routine 1 Interactive Timer Modal -->
+    <div class="routine-modal" id="routineModal">
+        <div class="routine-modal-card">
+            <div class="routine-status-badge" id="routineStatusBadge">Working Set</div>
+            <div class="routine-current-name" id="routineCurrentName">Front plank</div>
+            <div class="routine-timer-display" id="routineTimerDisplay">01:00</div>
+            <div class="routine-next-preview" id="routineNextPreview">Next: Side plank (Left)</div>
+            <div class="routine-modal-controls">
+                <button class="btn btn-secondary" onclick="pauseRoutineTimer()" id="routinePauseBtn">Pause</button>
+                <button class="btn" onclick="skipRoutineStep()">Skip</button>
+                <button class="btn btn-secondary" onclick="closeRoutineModal()">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('workouts', this)">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+            Workouts
+        </button>
+        <button class="nav-item" onclick="switchTab('weekly', this)">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            Weekly Plan
+        </button>
+        <button class="nav-item" onclick="switchTab('roadmap', this)">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.5 3.75H9a2.25 2.25 0 01-2.25-2.25V5.25A2.25 2.25 0 019 3h6a2.25 2.25 0 012.25 2.25v13.5A2.25 2.25 0 0115 21z"/></svg>
+            Roadmap
+        </button>
+        <button class="nav-item" onclick="switchTab('settings', this)">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a6.932 6.932 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/></svg>
+            Settings
+        </button>
+    </nav>
+
+    <script>
+        // Workout Data Definition (Deadlift-free, non-redundant core)
+        const workouts = {
+            1: {
+                title: "Session 1: Unilateral Stability & Posterior Chain",
+                day: "Monday",
+                exercises: [
+                    { id: "s1_ex1", name: "Bulgarian Split Squats", sets: 3, reps: "8-10 / leg", note: "Controlled eccentric, drives knee-to-toe tracking." },
+                    { id: "s1_ex2", name: "B-Stance Romanian Deadlifts", sets: 3, reps: "10 / leg", note: "Hinge focus without heavy bilateral spinal load." },
+                    { id: "s1_ex3", name: "Dumbbell Suitcase Carries", sets: 3, reps: "30m / side", note: "Anti-lateral flexion & pelvic stability for the saddle." },
+                    { id: "s1_ex4", name: "Cable Face Pulls", sets: 3, reps: "15 reps", note: "Upper-back posture and shoulder health for aero/swim." }
+                ]
+            },
+            2: {
+                title: "Session 2: Knee Resilience & Upper Thoracic",
+                day: "Tuesday",
+                exercises: [
+                    { id: "s2_ex1", name: "Weighted Step-Ups", sets: 3, reps: "8-10 / leg", note: "Mimics running force absorption and climb power." },
+                    { id: "s2_ex2", name: "Prone Stability Ball Hamstring Curls", sets: 3, reps: "12 reps", note: "Hamstring and glute firing without lower back strain." },
+                    { id: "s2_ex3", name: "Straight-Arm Cable Lat Pulldowns", sets: 3, reps: "12 reps", note: "Lat-to-pelvis thoracolumbar fascia connection." },
+                    { id: "s2_ex4", name: "Incline Bench DB Lateral Raises", sets: 3, reps: "12-15 reps", note: "Shoulder stability and posture." }
+                ]
+            },
+            3: {
+                title: "Session 3: Glute Activation & Rotational Control",
+                day: "Thursday",
+                exercises: [
+                    { id: "s3_ex1", name: "Barbell Hip Thrusts (or DB)", sets: 3, reps: "10-12 reps", note: "Max glute drive without spinal compression." },
+                    { id: "s3_ex2", name: "Weighted Single-Leg Calf Raises", sets: 3, reps: "15 / leg", note: "Soleus and Achilles resilience for the marathon." },
+                    { id: "s3_ex3", name: "Half-Kneeling Single-Arm Cable Rows", sets: 3, reps: "10 / side", note: "Unilateral pulling and anti-rotation." }
+                ]
+            }
+        };
+
+        // Routine 1 (Standard) - Expanded with left/right and sub-blocks for timer sequence
+        const routine1Sequence = [
+            { name: "Front plank", duration: 60, type: "work" },
+            { name: "Side plank (Left)", duration: 45, type: "work" },
+            { name: "Side plank (Right)", duration: 45, type: "work" },
+            { name: "Glute bridge", duration: 60, type: "work" },
+            { name: "Hurdles (Left)", duration: 60, type: "work" },
+            { name: "Hurdles (Right)", duration: 60, type: "work" },
+            { name: "Superman back lifts", duration: 60, type: "work" },
+            { name: "Single-leg deadlifts (Left)", duration: 45, type: "work" },
+            { name: "Single-leg deadlifts (Right)", duration: 45, type: "work" },
+            { name: "V-sits: Running", duration: 20, type: "work" },
+            { name: "V-sits: Flutter kick", duration: 20, type: "work" },
+            { name: "V-sits: Scissor kick", duration: 20, type: "work" }
+        ];
+
+        const routine1DisplayItems = [
+            { id: "r1_1", text: "Front plank - 1 minute" },
+            { id: "r1_2", text: "Side plank - 45 seconds per side" },
+            { id: "r1_3", text: "Glute bridge - 1 min" },
+            { id: "r1_4", text: "Hurdles - 1 min per side" },
+            { id: "r1_5", text: "Superman back lifts - 1 min" },
+            { id: "r1_6", text: "Single-leg deadlifts - 45 s per leg" },
+            { id: "r1_7", text: "V-sits - 20 s each of running, flutter kick, scissor kick" }
+        ];
+
+        let currentSession = 1;
+        let isDeloadActive = false;
+        let gymDays = { 1: "Monday", 2: "Tuesday", 3: "Thursday" };
+
+        // App initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            renderWorkout();
+            renderWeeklyPlan();
+            updateTRBanner();
+            document.getElementById('gymDay1').value = gymDays[1];
+            document.getElementById('gymDay2').value = gymDays[2];
+            document.getElementById('gymDay3').value = gymDays[3];
+        });
+
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        function switchSession(sessionId) {
+            currentSession = sessionId;
+            document.querySelectorAll('.session-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(`stab-${sessionId}`).classList.add('active');
+            renderWorkout();
+        }
+
+        function toggleDeload() {
+            isDeloadActive = !isDeloadActive;
+            const pill = document.getElementById('deloadPill');
+            const banner = document.getElementById('deloadBanner');
+            if (isDeloadActive) {
+                pill.classList.add('active');
+                pill.innerHTML = `<span>⚡ Deload: ON</span>`;
+                banner.classList.add('visible');
+            } else {
+                pill.classList.remove('active');
+                pill.innerHTML = `<span>⚡ Deload: OFF</span>`;
+                banner.classList.remove('visible');
+            }
+            saveState();
+        }
+
+        function renderWorkout() {
+            const workout = workouts[currentSession];
+            const container = document.getElementById('workoutContainer');
+            
+            document.getElementById('stab-1').innerText = `Session 1 (${gymDays[1].substring(0,3)})`;
+            document.getElementById('stab-2').innerText = `Session 2 (${gymDays[2].substring(0,3)})`;
+            document.getElementById('stab-3').innerText = `Session 3 (${gymDays[3].substring(0,3)})`;
+
+            let html = `
+                <div class="card">
+                    <h2>${workout.title}</h2>
+                    <p>Scheduled Day: <strong>${gymDays[currentSession]}</strong> ${isDeloadActive ? '• <span style="color:var(--accent-amber)">DELOAD ACTIVE</span>' : ''}</p>
+            `;
+
+            workout.exercises.forEach(ex => {
+                html += `
+                    <div class="exercise-item">
+                        <div class="exercise-header">
+                            <span class="exercise-name">${ex.name}</span>
+                            <span class="exercise-meta">${ex.sets} sets × ${ex.reps}</span>
+                        </div>
+                        <div class="exercise-notes">${ex.note}</div>
+                        <div class="sets-grid">
+                `;
+                for (let s = 1; s <= ex.sets; s++) {
+                    const stateKey = `${ex.id}_set_${s}`;
+                    const isCompleted = localStorage.getItem(stateKey) === 'true';
+                    html += `
+                        <button class="set-btn ${isCompleted ? 'completed' : ''}" onclick="toggleSet('${stateKey}', this)">
+                            Set ${s}
+                            <span>${isCompleted ? 'Done' : 'Rest'}</span>
+                        </button>
+                    `;
+                }
+                html += `</div></div>`;
+            });
+
+            // Routine 1 Checklist at the bottom with Start Timer Button
+            html += `
+                <div class="routine1-box">
+                    <h3>
+                        <span>Routine 1 (standard) - 10 min</span>
+                        <button class="btn" onclick="startRoutineTimer()" style="padding: 4px 10px; font-size: 0.75rem;">▶ Start Routine Timer</button>
+                    </h3>
+                    <p>Mandatory finisher at the end of every workout session with 5s transitions.</p>
+            `;
+
+            routine1DisplayItems.forEach(item => {
+                const r1Key = `s${currentSession}_${item.id}`;
+                const isChecked = localStorage.getItem(r1Key) === 'true';
+                html += `
+                    <div class="checklist-item ${isChecked ? 'done' : ''}">
+                        <input type="checkbox" id="${r1Key}" ${isChecked ? 'checked' : ''} onchange="toggleChecklist('${r1Key}', this)">
+                        <label for="${r1Key}" style="cursor:pointer; flex:1;">${item.text}</label>
+                    </div>
+                `;
+            });
+
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+
+        function toggleSet(key, btn) {
+            const current = localStorage.getItem(key) === 'true';
+            const next = !current;
+            localStorage.setItem(key, next);
+            if (next) {
+                btn.classList.add('completed');
+                btn.querySelector('span').innerText = 'Done';
+                startRestTimer(90);
+            } else {
+                btn.classList.remove('completed');
+                btn.querySelector('span').innerText = 'Rest';
+            }
+        }
+
+        function toggleChecklist(key, checkbox) {
+            localStorage.setItem(key, checkbox.checked);
+            const parent = checkbox.closest('.checklist-item');
+            if (checkbox.checked) {
+                parent.classList.add('done');
+            } else {
+                parent.classList.remove('done');
+            }
+        }
+
+        // Rest Timer Logic (Main lifting)
+        let timerInterval = null;
+        let timeLeft = 0;
+
+        function startRestTimer(seconds) {
+            timeLeft = seconds;
+            const bar = document.getElementById('timerBar');
+            bar.classList.add('active');
+            updateTimerDisplay();
+            
+            if (timerInterval) clearInterval(timerInterval);
+            
+            const endTime = Date.now() + seconds * 1000;
+            timerInterval = setInterval(() => {
+                timeLeft = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    bar.classList.remove('active');
+                    playBeep();
+                }
+            }, 250);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const secs = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timerDisplay').innerText = `${mins}:${secs}`;
+        }
+
+        function adjustTimer(amount) {
+            timeLeft = Math.max(0, timeLeft + amount);
+            updateTimerDisplay();
+        }
+
+        function stopTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            document.getElementById('timerBar').classList.remove('active');
+        }
+
+        // Routine 1 Interval Timer Logic with 5s transitions
+        let routineIndex = 0;
+        let routineTimerInterval = null;
+        let routineTimeLeft = 0;
+        let routineState = 'work'; // 'work' or 'transition'
+        let isRoutinePaused = false;
+
+        function startRoutineTimer() {
+            routineIndex = 0;
+            routineState = 'work';
+            isRoutinePaused = false;
+            routineTimeLeft = routine1Sequence[routineIndex].duration;
+            document.getElementById('routineModal').classList.add('active');
+            runRoutineCountdown();
+        }
+
+        function runRoutineCountdown() {
+            if (routineTimerInterval) clearInterval(routineTimerInterval);
+            
+            const endTime = Date.now() + routineTimeLeft * 1000;
+            updateRoutineModalUI();
+
+            routineTimerInterval = setInterval(() => {
+                if (isRoutinePaused) return;
+                routineTimeLeft = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+                updateRoutineModalUI();
+
+                if (routineTimeLeft <= 0) {
+                    clearInterval(routineTimerInterval);
+                    playBeep();
+                    advanceRoutineStep();
+                }
+            }, 250);
+        }
+
+        function advanceRoutineStep() {
+            if (routineState === 'work') {
+                // Check if there is a next step
+                if (routineIndex < routine1Sequence.length - 1) {
+                    // Enter 5s transition
+                    routineState = 'transition';
+                    routineTimeLeft = 5;
+                    runRoutineCountdown();
+                } else {
+                    // Finished all exercises
+                    document.getElementById('routineStatusBadge').innerText = "Complete!";
+                    document.getElementById('routineCurrentName').innerText = "Routine 1 Finished 🎉";
+                    document.getElementById('routineTimerDisplay').innerText = "00:00";
+                    document.getElementById('routineNextPreview').innerText = "Great job!";
+                }
+            } else {
+                // Transition finished, move to next exercise work block
+                routineIndex++;
+                routineState = 'work';
+                routineTimeLeft = routine1Sequence[routineIndex].duration;
+                runRoutineCountdown();
+            }
+        }
+
+        function updateRoutineModalUI() {
+            const currentEx = routine1Sequence[routineIndex];
+            const badge = document.getElementById('routineStatusBadge');
+            const nameEl = document.getElementById('routineCurrentName');
+            const display = document.getElementById('routineTimerDisplay');
+            const preview = document.getElementById('routineNextPreview');
+
+            const mins = Math.floor(routineTimeLeft / 60).toString().padStart(2, '0');
+            const secs = (routineTimeLeft % 60).toString().padStart(2, '0');
+            display.innerText = `${mins}:${secs}`;
+
+            if (routineState === 'work') {
+                badge.innerText = `Exercise ${routineIndex + 1} of ${routine1Sequence.length}`;
+                nameEl.innerText = currentEx.name;
+                
+                // Determine next preview
+                if (routineIndex < routine1Sequence.length - 1) {
+                    preview.innerText = `Next: Transition (5s) → ${routine1Sequence[routineIndex + 1].name}`;
+                } else {
+                    preview.innerText = `Final Exercise!`;
+                }
+            } else {
+                badge.innerText = `Transition (Get Ready)`;
+                nameEl.innerText = `Next: ${routine1Sequence[routineIndex + 1].name}`;
+                preview.innerText = `Prepare for next movement`;
+            }
+        }
+
+        function pauseRoutineTimer() {
+            isRoutinePaused = !isRoutinePaused;
+            const btn = document.getElementById('routinePauseBtn');
+            if (isRoutinePaused) {
+                btn.innerText = "Resume";
+                btn.style.background = "var(--primary)";
+                btn.style.color = "white";
+            } else {
+                btn.innerText = "Pause";
+                btn.style.background = "";
+                btn.style.color = "";
+                // Restart interval with adjusted end time
+                const endTime = Date.now() + routineTimeLeft * 1000;
+                if (routineTimerInterval) clearInterval(routineTimerInterval);
+                routineTimerInterval = setInterval(() => {
+                    if (isRoutinePaused) return;
+                    routineTimeLeft = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+                    updateRoutineModalUI();
+                    if (routineTimeLeft <= 0) {
+                        clearInterval(routineTimerInterval);
+                        playBeep();
+                        advanceRoutineStep();
+                    }
+                }, 250);
+            }
+        }
+
+        function skipRoutineStep() {
+            if (routineTimerInterval) clearInterval(routineTimerInterval);
+            advanceRoutineStep();
+        }
+
+        function closeRoutineModal() {
+            if (routineTimerInterval) clearInterval(routineTimerInterval);
+            document.getElementById('routineModal').classList.remove('active');
+        }
+
+        function playBeep() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = 587.33;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch (e) {
+                console.log('Audio notification prevented', e);
+            }
+        }
+
+        function renderWeeklyPlan() {
+            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            const container = document.getElementById('weeklyPlanContainer');
+            let html = "";
+
+            days.forEach(day => {
+                let desc = "Endurance / Active Recovery";
+                let badge = "";
+                if (day === gymDays[1]) {
+                    desc = "Session 1: Unilateral Stability & Posterior Chain + Routine 1";
+                    badge = `<span style="background:var(--primary-light); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">Strength 1</span>`;
+                } else if (day === gymDays[2]) {
+                    desc = "Session 2: Knee Resilience & Upper Thoracic + Routine 1";
+                    badge = `<span style="background:var(--primary-light); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">Strength 2</span>`;
+                } else if (day === gymDays[3]) {
+                    desc = "Session 3: Glute Activation & Rotational Control + Routine 1";
+                    badge = `<span style="background:var(--primary-light); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">Strength 3</span>`;
+                } else if (day === "Wednesday" || day === "Saturday") {
+                    desc = "TrainerRoad Bike / Long Brick Session";
+                }
+
+                html += `
+                    <div class="plan-day">
+                        <div class="plan-day-header">
+                            <span>${day}</span>
+                            ${badge}
+                        </div>
+                        <div class="plan-day-content">${desc}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function saveGymDays() {
+            gymDays[1] = document.getElementById('gymDay1').value;
+            gymDays[2] = document.getElementById('gymDay2').value;
+            gymDays[3] = document.getElementById('gymDay3').value;
+            saveState();
+            renderWorkout();
+            renderWeeklyPlan();
+        }
+
+        function saveICSUrl() {
+            const url = document.getElementById('icsUrl').value;
+            localStorage.setItem('outlaw_ics_url', url);
+            syncCalendar();
+        }
+
+        function syncCalendar() {
+            const textEl = document.getElementById('trTodayText');
+            textEl.innerText = "TrainerRoad calendar synced: Endurance Base & Aerobic Efficiency.";
+        }
+
+        function updateTRBanner() {
+            const savedUrl = localStorage.getItem('outlaw_ics_url');
+            if (savedUrl) {
+                document.getElementById('icsUrl').value = savedUrl;
+            }
+            syncCalendar();
+        }
+
+        function saveState() {
+            localStorage.setItem('outlaw_deload', isDeloadActive);
+            localStorage.setItem('outlaw_gym_days', JSON.stringify(gymDays));
+        }
+
+        function loadState() {
+            const savedDeload = localStorage.getItem('outlaw_deload');
+            if (savedDeload === 'true') {
+                toggleDeload();
+            }
+            const savedDays = localStorage.getItem('outlaw_gym_days');
+            if (savedDays) {
+                gymDays = JSON.parse(savedDays);
+            }
+        }
+
+        function resetAppData() {
+            if (confirm("Reset all workout completion progress?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
