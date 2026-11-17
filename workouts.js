@@ -32,7 +32,7 @@ const ROUTINES = {
 // STRENGTH SESSIONS CONFIGURATION (Deadlift-free, Tri-focused)
 const STRENGTH_SESSIONS = {
     1: {
-        title: "Session 1,
+        title: "Session 1",
         subtitle: "Gym Session 1",
         exercises: [
             { id: "s1_ex1", name: "Bulgarian Split Squats", meta: "3 Sets × 8-10 reps / leg", notes: "Elevated rear foot, upright torso for quad/glute drive.", sets: 4 },
@@ -42,7 +42,7 @@ const STRENGTH_SESSIONS = {
         ]
     },
     2: {
-        title: "Session 2,
+        title: "Session 2",
         subtitle: "Tuesday Gym Session",
         exercises: [
             { id: "s2_ex1", name: "Single-Arm Dumbbell Row", meta: "3 Sets × 10 reps / side", notes: "Support on bench, pull to hip for aero posture strength.", sets: 4 },
@@ -52,7 +52,7 @@ const STRENGTH_SESSIONS = {
         ]
     },
     3: {
-        title: "Session 3,
+        title: "Session 3",
         subtitle: "Thursday Gym Session",
         exercises: [
             { id: "s3_ex1", name: "Goblet Squat (Deep Pause)", meta: "3 Sets × 10 reps", notes: "2-second pause at bottom, upright chest.", sets: 4 },
