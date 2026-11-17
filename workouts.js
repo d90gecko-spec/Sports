@@ -1,13 +1,20 @@
 // ROUTINE DEFINITIONS (Routine 1 & Routine 2)
 const ROUTINES = {
     routine1: {
-        name: "Routine 1 (Plank & Stability Series)",
+        name: "Routine 1 Scientific Triathlon",
         exercises: [
-            { name: "Front Plank (No Supine Planks)", type: "timed", duration: 60, notes: "Forearms on floor, glutes squeezed hard, neutral lower back." },
+            { name: "Front Plank", type: "timed", duration: 60, notes: "Forearms on floor, glutes squeezed hard, neutral lower back." },
             { name: "Side Plank (Left)", type: "timed", duration: 45, notes: "Stack feet or stagger; lift hips high, lateral oblique engagement." },
             { name: "Side Plank (Right)", type: "timed", duration: 45, notes: "Mirror image on right side." },
-            { name: "Bird-Dog / Quadruped Reach", type: "reps", sets: 3, reps: "10 / side", notes: "Alternate slow extensions, anti-rotation focus." },
-            { name: "Dead Bug (Low Back Flat)", type: "reps", sets: 3, reps: "10 / side", notes: "Press lumbar spine flat into floor throughout." }
+            { name: "Glute bridge", type: "timed", duration: 60, notes: "Alternate slow extensions" },
+            { name: "Hurdles (Left)", type: "timed", duration: 60, notes: "Hip mobility" },
+            { name: "Hurdles (Right)", type: "timed", duration: 60, notes: "Hip Mobility" },
+            { name: "Superman Back Lifts", type: "timed", duration: 60, notes: "Alternate slow extensions" },
+            { name: "RDL (Left)", type: "timed", duration: 60, notes: "Balance" },
+            { name: "RDL (Right)", type: "timed", duration: 60, notes: "Balance" },
+            { name: "Running man", type: "timed", duration: 20, notes: "Finish" },
+            { name: "Flutter", type: "timed", duration: 20, notes: "Finish" },
+            { name: "V Kicks", type: "timed", duration: 20, notes: "Finish" }           
         ]
     },
     routine2: {
