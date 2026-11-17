@@ -88,7 +88,42 @@
            View Repository
         </a>
     </div>
+<script>
+    function resetAppData() {
+            if (confirm("Reset all workout and video completion progress?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
 
+        // Screen Wake Lock for Pixel 10a
+        let wakeLock = null;
+
+        async function requestWakeLock() {
+            if ('wakeLock' in navigator) {
+                try {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    wakeLock.addEventListener('release', () => {
+                        wakeLock = null;
+                    });
+                } catch (err) {
+                    console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+                }
+            }
+        }
+
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock === null && document.visibilityState === 'visible') {
+                await requestWakeLock();
+            }
+        });
+
+        window.addEventListener('pointerdown', () => {
+            if (!wakeLock) {
+                requestWakeLock();
+            }
+        }, { once: true });
+</script>
 </main>
 
 <footer>
