@@ -32,32 +32,32 @@ const ROUTINES = {
 // STRENGTH SESSIONS CONFIGURATION (Deadlift-free, Tri-focused)
 const STRENGTH_SESSIONS = {
     1: {
-        title: "Session 1: Unilateral Lower & Glutes",
-        subtitle: "Monday Gym Session",
+        title: "Session 1,
+        subtitle: "Gym Session 1",
         exercises: [
             { id: "s1_ex1", name: "Bulgarian Split Squats", meta: "3 Sets × 8-10 reps / leg", notes: "Elevated rear foot, upright torso for quad/glute drive.", sets: 4 },
-            { id: "s1_ex2", name: "Single-Leg Romanian Deadlift (DB)", meta: "3 Sets × 10 reps / leg", notes: "Hinge at hip, flat back, hamstring & glute focus without axial heavy load.", sets: 4 },
-            { id: "s1_ex3", name: "Walking Lunges", meta: "3 Sets × 12 steps / leg", notes: "Controlled knee tracking, upright posture.", sets: 3 },
-            { id: "s1_ex4", name: "Calf Raises (Single Leg)", meta: "3 Sets × 15 reps / leg", notes: "Full range of motion off step edge.", sets: 3 }
+            { id: "s1_ex2", name: "Single-Leg Romanian Deadlift", meta: "3 Sets × 10 reps / leg", notes: "Hinge at hip, flat back, hamstring & glute focus without axial heavy load.", sets: 4 },
+            { id: "s1_ex3", name: "Cable Lat Pull Down", meta: "3 Sets × 10 steps / leg", notes: "Engage lats and shoulders", sets: 3 },
+            { id: "s1_ex4", name: "Suitcase Carry", meta: "3 Sets x 20m each side", notes: "Anti Rotation", sets: 3 }
         ]
     },
     2: {
-        title: "Session 2: Upper Posture & Core Integration",
+        title: "Session 2,
         subtitle: "Tuesday Gym Session",
         exercises: [
             { id: "s2_ex1", name: "Single-Arm Dumbbell Row", meta: "3 Sets × 10 reps / side", notes: "Support on bench, pull to hip for aero posture strength.", sets: 4 },
-            { id: "s2_ex2", name: "Half-Kneeling Overhead Press", meta: "3 Sets × 8 reps / side", notes: "Core braced, strict vertical press.", sets: 3 },
-            { id: "s2_ex3", name: "Lat Pulldown or Pull-Ups", meta: "3 Sets × 10 reps", notes: "Controlled eccentric return.", sets: 3 },
-            { id: "s2_ex4", name: "Face Pulls", meta: "3 Sets × 15 reps", notes: "Rear delt and rotator cuff durability for TT position.", sets: 3 }
+            { id: "s2_ex2", name: "Lunge Squats", meta: "3 Sets × 8 reps / side", notes: "Core braced, strict horizontal shoulders.", sets: 3 },
+            { id: "s2_ex2", name: "Overhead Press", meta: "3 Sets × 8 reps / side", notes: "Core braced, strict vertical press.", sets: 3 },
+            { id: "s2_ex4", name: "Box jumps", meta: "3 Sets × 15 reps", notes: "Boinggg", sets: 3 }
         ]
     },
     3: {
-        title: "Session 3: Leg Endurance & Stability",
+        title: "Session 3,
         subtitle: "Thursday Gym Session",
         exercises: [
             { id: "s3_ex1", name: "Goblet Squat (Deep Pause)", meta: "3 Sets × 10 reps", notes: "2-second pause at bottom, upright chest.", sets: 4 },
             { id: "s3_ex2", name: "Step-Ups onto Box", meta: "3 Sets × 10 reps / leg", notes: "Drive through heel, controlled descent.", sets: 3 },
-            { id: "s3_ex3", name: "Cossack Squats / Lateral Lunges", meta: "3 Sets × 8 reps / side", notes: "Mobility and lateral knee stability.", sets: 3 },
+            { id: "s3_ex3", name: "Cable Row", meta: "3 Sets × 8 reps / side", notes: "YeeHaww", sets: 3 },
             { id: "s3_ex4", name: "Single-Leg Balance & Reach", meta: "3 Sets × 30s / leg", notes: "Proprioception and ankle stability.", sets: 3 }
         ]
     }
