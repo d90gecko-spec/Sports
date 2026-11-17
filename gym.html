@@ -365,6 +365,10 @@
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .btn-secondary {
@@ -519,7 +523,7 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             cursor: pointer;
             padding: 4px 0;
@@ -528,8 +532,8 @@
         }
 
         .nav-item svg {
-            width: 22px;
-            height: 22px;
+            width: 21px;
+            height: 21px;
             stroke: currentColor;
             stroke-width: 2;
             fill: none;
@@ -573,6 +577,142 @@
             font-size: 0.95rem;
             color: var(--primary);
             margin-bottom: 6px;
+        }
+
+        /* Videos Hierarchy Tree & Progress Tracker */
+        .folder-details {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: var(--surface);
+            overflow: hidden;
+        }
+
+        .folder-summary {
+            padding: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface-alt);
+            list-style: none;
+        }
+
+        .folder-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .folder-summary-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .folder-progress-badge {
+            font-size: 0.72rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .folder-body {
+            padding: 10px 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .subfolder-details {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: var(--bg-primary);
+        }
+
+        .subfolder-summary {
+            padding: 8px 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        .subfolder-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .video-list {
+            padding: 6px 10px 10px 10px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--surface);
+        }
+
+        .video-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            background: var(--surface-alt);
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .video-row.completed {
+            background: var(--success-light);
+            border-color: var(--success);
+        }
+
+        .video-row.completed .video-title-text {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .video-row-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .video-row-left input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--success);
+            cursor: pointer;
+        }
+
+        .video-title-text {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .video-link-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .folder-open-link {
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
         }
 
         /* Settings Form */
@@ -632,7 +772,7 @@
             </div>
 
             <div id="workoutContainer">
-                <!-- Dynamically populated workout blocks -->
+                <div class="card"><p>Loading workouts configuration...</p></div>
             </div>
         </div>
 
@@ -672,7 +812,21 @@
             </div>
         </div>
 
-        <!-- TAB 4: SETTINGS -->
+        <!-- TAB 4: VIDEOS -->
+        <div id="tab-videos" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <h2 style="margin:0;">Training Video Library</h2>
+                    <a href="https://drive.google.com/drive/folders/1xgV_yxiyzNLju992_SZKCOxVmvLFisMX?usp=drive_link" target="_blank" rel="noopener" class="btn">Open Root Folder ↗</a>
+                </div>
+                <p>Track your watched videos with persistent local storage. Click any video to mark it done.</p>
+                <div id="videoHierarchyContainer">
+                    <p>Loading video library structure...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: SETTINGS -->
         <div id="tab-settings" class="tab-content">
             <div class="card">
                 <h2>Gym Strength Days</h2>
@@ -695,7 +849,7 @@
                     <label for="gymDay2">Session 2 Day</label>
                     <select id="gymDay2" onchange="saveGymDays()">
                         <option value="Monday">Monday</option>
-                        <option value="Tuesday" selected>Tuesday</option>
+                        <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
                         <option value="Thursday">Thursday</option>
                         <option value="Friday">Friday</option>
@@ -710,7 +864,7 @@
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday" selected>Thursday</option>
+                        <option value="Thursday">Thursday</option>
                         <option value="Friday">Friday</option>
                         <option value="Saturday">Saturday</option>
                         <option value="Sunday">Sunday</option>
@@ -775,6 +929,10 @@
             <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.5 3.75H9a2.25 2.25 0 01-2.25-2.25V5.25A2.25 2.25 0 019 3h6a2.25 2.25 0 012.25 2.25v13.5A2.25 2.25 0 0115 21z"/></svg>
             Roadmap
         </button>
+        <button class="nav-item" onclick="switchTab('videos', this)">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+            Videos
+        </button>
         <button class="nav-item" onclick="switchTab('settings', this)">
             <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a6.932 6.932 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/></svg>
             Settings
@@ -782,40 +940,15 @@
     </nav>
 
     <script>
-        // Workout Data Definition (Deadlift-free, non-redundant core)
-        const workouts = {
-            1: {
-                title: "Session 1: Unilateral Stability & Posterior Chain",
-                day: "Monday",
-                exercises: [
-                    { id: "s1_ex1", name: "Bulgarian Split Squats", sets: 3, reps: "8-10 / leg", note: "Controlled eccentric, drives knee-to-toe tracking." },
-                    { id: "s1_ex2", name: "B-Stance Romanian Deadlifts", sets: 3, reps: "10 / leg", note: "Hinge focus without heavy bilateral spinal load." },
-                    { id: "s1_ex3", name: "Dumbbell Suitcase Carries", sets: 3, reps: "30m / side", note: "Anti-lateral flexion & pelvic stability for the saddle." },
-                    { id: "s1_ex4", name: "Cable Face Pulls", sets: 3, reps: "15 reps", note: "Upper-back posture and shoulder health for aero/swim." }
-                ]
-            },
-            2: {
-                title: "Session 2: Knee Resilience & Upper Thoracic",
-                day: "Tuesday",
-                exercises: [
-                    { id: "s2_ex1", name: "Weighted Step-Ups", sets: 3, reps: "8-10 / leg", note: "Mimics running force absorption and climb power." },
-                    { id: "s2_ex2", name: "Prone Stability Ball Hamstring Curls", sets: 3, reps: "12 reps", note: "Hamstring and glute firing without lower back strain." },
-                    { id: "s2_ex3", name: "Straight-Arm Cable Lat Pulldowns", sets: 3, reps: "12 reps", note: "Lat-to-pelvis thoracolumbar fascia connection." },
-                    { id: "s2_ex4", name: "Incline Bench DB Lateral Raises", sets: 3, reps: "12-15 reps", note: "Shoulder stability and posture." }
-                ]
-            },
-            3: {
-                title: "Session 3: Glute Activation & Rotational Control",
-                day: "Thursday",
-                exercises: [
-                    { id: "s3_ex1", name: "Barbell Hip Thrusts (or DB)", sets: 3, reps: "10-12 reps", note: "Max glute drive without spinal compression." },
-                    { id: "s3_ex2", name: "Weighted Single-Leg Calf Raises", sets: 3, reps: "15 / leg", note: "Soleus and Achilles resilience for the marathon." },
-                    { id: "s3_ex3", name: "Half-Kneeling Single-Arm Cable Rows", sets: 3, reps: "10 / side", note: "Unilateral pulling and anti-rotation." }
-                ]
-            }
-        };
+        // Global variables for modular configuration & state
+        let workouts = {};
+        let routine1DisplayItems = [];
+        let videoLibrary = [];
+        let gymDays = { 1: "Monday", 2: "Tuesday", 3: "Thursday" };
+        let currentSession = 1;
+        let isDeloadActive = false;
 
-        // Routine 1 (Standard) - Expanded with left/right and sub-blocks for timer sequence
+        // Routine 1 Sequence for interval timer
         const routine1Sequence = [
             { name: "Front plank", duration: 60, type: "work" },
             { name: "Side plank (Left)", duration: 45, type: "work" },
@@ -831,29 +964,53 @@
             { name: "V-sits: Scissor kick", duration: 20, type: "work" }
         ];
 
-        const routine1DisplayItems = [
-            { id: "r1_1", text: "Front plank - 1 minute" },
-            { id: "r1_2", text: "Side plank - 45 seconds per side" },
-            { id: "r1_3", text: "Glute bridge - 1 min" },
-            { id: "r1_4", text: "Hurdles - 1 min per side" },
-            { id: "r1_5", text: "Superman back lifts - 1 min" },
-            { id: "r1_6", text: "Single-leg deadlifts - 45 s per leg" },
-            { id: "r1_7", text: "V-sits - 20 s each of running, flutter kick, scissor kick" }
-        ];
+        // Async loader for workouts.json and videoLibrary.json
+        async function loadAppData() {
+            try {
+                const [workoutRes, videoRes] = await Promise.all([
+                    fetch('workouts.json'),
+                    fetch('videoLibrary.json')
+                ]);
 
-        let currentSession = 1;
-        let isDeloadActive = false;
-        let gymDays = { 1: "Monday", 2: "Tuesday", 3: "Thursday" };
+                if (!workoutRes.ok || !videoRes.ok) throw new Error('Failed to load configuration JSON files');
+
+                const workoutData = await workoutRes.json();
+                workouts = workoutData.sessions;
+                routine1DisplayItems = workoutData.routine1;
+                
+                const savedDays = localStorage.getItem('outlaw_gym_days');
+                if (savedDays) {
+                    gymDays = JSON.parse(savedDays);
+                } else if (workoutData.gymDays) {
+                    gymDays = workoutData.gymDays;
+                }
+
+                videoLibrary = await videoRes.json();
+
+                renderWorkout();
+                renderWeeklyPlan();
+                renderVideos();
+                updateTRBanner();
+
+                document.getElementById('gymDay1').value = gymDays[1];
+                document.getElementById('gymDay2').value = gymDays[2];
+                document.getElementById('gymDay3').value = gymDays[3];
+
+            } catch (err) {
+                console.error('Error loading modular app data:', err);
+                document.getElementById('workoutContainer').innerHTML = `
+                    <div class="card"><p style="color:var(--primary);">Could not load workouts.json or videoLibrary.json. Ensure both files are in your repository root.</p></div>
+                `;
+                document.getElementById('videoHierarchyContainer').innerHTML = `
+                    <div class="card"><p style="color:var(--primary);">Could not load videoLibrary.json.</p></div>
+                `;
+            }
+        }
 
         // App initialization
         window.addEventListener('DOMContentLoaded', () => {
             loadState();
-            renderWorkout();
-            renderWeeklyPlan();
-            updateTRBanner();
-            document.getElementById('gymDay1').value = gymDays[1];
-            document.getElementById('gymDay2').value = gymDays[2];
-            document.getElementById('gymDay3').value = gymDays[3];
+            loadAppData();
         });
 
         function switchTab(tabId, btnElement) {
@@ -889,6 +1046,7 @@
         function renderWorkout() {
             const workout = workouts[currentSession];
             const container = document.getElementById('workoutContainer');
+            if (!workout) return;
             
             document.getElementById('stab-1').innerText = `Session 1 (${gymDays[1].substring(0,3)})`;
             document.getElementById('stab-2').innerText = `Session 2 (${gymDays[2].substring(0,3)})`;
@@ -923,7 +1081,6 @@
                 html += `</div></div>`;
             });
 
-            // Routine 1 Checklist at the bottom with Start Timer Button
             html += `
                 <div class="routine1-box">
                     <h3>
@@ -946,6 +1103,94 @@
 
             html += `</div></div>`;
             container.innerHTML = html;
+        }
+
+        function renderVideos() {
+            const container = document.getElementById('videoHierarchyContainer');
+            if (!videoLibrary || videoLibrary.length === 0) return;
+            let html = '';
+
+            videoLibrary.forEach((program) => {
+                let totalVids = 0;
+                let doneVids = 0;
+
+                program.subfolders.forEach(sub => {
+                    if (sub.videos) {
+                        sub.videos.forEach(vid => {
+                            totalVids++;
+                            if (localStorage.getItem(vid.id) === 'true') {
+                                doneVids++;
+                            }
+                        });
+                    }
+                });
+
+                const badgeText = totalVids > 0 ? `${doneVids}/${totalVids} watched` : `Drive folder`;
+
+                html += `
+                    <details class="folder-details">
+                        <summary class="folder-summary">
+                            <div class="folder-summary-left">
+                                <span>📁</span>
+                                <span>${program.name}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span class="folder-progress-badge">${badgeText}</span>
+                                <a href="${program.url}" target="_blank" rel="noopener" class="folder-open-link" onclick="event.stopPropagation()">Open ↗</a>
+                            </div>
+                        </summary>
+                        <div class="folder-body">
+                `;
+
+                program.subfolders.forEach(sub => {
+                    html += `
+                        <details class="subfolder-details">
+                            <summary class="subfolder-summary">
+                                <div class="folder-summary-left">
+                                    <span>📂</span>
+                                    <span>${sub.name}</span>
+                                </div>
+                                <a href="${sub.url}" target="_blank" rel="noopener" class="folder-open-link" onclick="event.stopPropagation()">Folder ↗</a>
+                            </summary>
+                            <div class="video-list">
+                    `;
+
+                    if (sub.videos && sub.videos.length > 0) {
+                        sub.videos.forEach(vid => {
+                            const isDone = localStorage.getItem(vid.id) === 'true';
+                            html += `
+                                <div class="video-row ${isDone ? 'completed' : ''}" id="row_${vid.id}">
+                                    <div class="video-row-left" onclick="toggleVideo('${vid.id}')">
+                                        <input type="checkbox" id="chk_${vid.id}" ${isDone ? 'checked' : ''} onclick="event.stopPropagation(); toggleVideo('${vid.id}')">
+                                        <span class="video-title-text">🎬 ${vid.title}</span>
+                                    </div>
+                                    <a href="${vid.url}" target="_blank" rel="noopener" class="video-link-badge">Watch ↗</a>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        html += `
+                            <div class="video-row">
+                                <span class="video-title-text" style="color:var(--text-muted);">Videos located in external subfolder</span>
+                                <a href="${sub.url}" target="_blank" rel="noopener" class="video-link-badge">Drive ↗</a>
+                            </div>
+                        `;
+                    }
+
+                    html += `</div></details>`;
+                });
+
+                html += `</div></details>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleVideo(vidId) {
+            const current = localStorage.getItem(vidId) === 'true';
+            const next = !current;
+            localStorage.setItem(vidId, next);
+            renderVideos();
         }
 
         function toggleSet(key, btn) {
@@ -972,7 +1217,7 @@
             }
         }
 
-        // Rest Timer Logic (Main lifting)
+        // Rest Timer Logic
         let timerInterval = null;
         let timeLeft = 0;
 
@@ -1012,11 +1257,11 @@
             document.getElementById('timerBar').classList.remove('active');
         }
 
-        // Routine 1 Interval Timer Logic with 5s transitions
+        // Routine 1 Interval Timer Logic
         let routineIndex = 0;
         let routineTimerInterval = null;
         let routineTimeLeft = 0;
-        let routineState = 'work'; // 'work' or 'transition'
+        let routineState = 'work';
         let isRoutinePaused = false;
 
         function startRoutineTimer() {
@@ -1049,21 +1294,17 @@
 
         function advanceRoutineStep() {
             if (routineState === 'work') {
-                // Check if there is a next step
                 if (routineIndex < routine1Sequence.length - 1) {
-                    // Enter 5s transition
                     routineState = 'transition';
                     routineTimeLeft = 5;
                     runRoutineCountdown();
                 } else {
-                    // Finished all exercises
                     document.getElementById('routineStatusBadge').innerText = "Complete!";
                     document.getElementById('routineCurrentName').innerText = "Routine 1 Finished 🎉";
                     document.getElementById('routineTimerDisplay').innerText = "00:00";
                     document.getElementById('routineNextPreview').innerText = "Great job!";
                 }
             } else {
-                // Transition finished, move to next exercise work block
                 routineIndex++;
                 routineState = 'work';
                 routineTimeLeft = routine1Sequence[routineIndex].duration;
@@ -1086,7 +1327,6 @@
                 badge.innerText = `Exercise ${routineIndex + 1} of ${routine1Sequence.length}`;
                 nameEl.innerText = currentEx.name;
                 
-                // Determine next preview
                 if (routineIndex < routine1Sequence.length - 1) {
                     preview.innerText = `Next: Transition (5s) → ${routine1Sequence[routineIndex + 1].name}`;
                 } else {
@@ -1110,7 +1350,6 @@
                 btn.innerText = "Pause";
                 btn.style.background = "";
                 btn.style.color = "";
-                // Restart interval with adjusted end time
                 const endTime = Date.now() + routineTimeLeft * 1000;
                 if (routineTimerInterval) clearInterval(routineTimerInterval);
                 routineTimerInterval = setInterval(() => {
@@ -1231,12 +1470,6 @@
             }
         }
 
-        function resetAppData() {
-            if (confirm("Reset all workout completion progress?")) {
-                localStorage.clear();
-                location.reload();
-            }
-        }
         function resetAppData() {
             if (confirm("Reset all workout and video completion progress?")) {
                 localStorage.clear();
