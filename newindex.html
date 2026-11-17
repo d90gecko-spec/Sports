@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Outlaw 2027 Triathlon Strength Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>Outlaw 2027 Strength Hub</h1>
+            <p>Triathlon Conditioning & Injury Prevention</p>
+        </div>
+        <div class="header-controls">
+            <button class="deload-pill" id="deloadPill" onclick="toggleDeload()">
+                <span>⚡ Deload: OFF</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- TAB 1: WORKOUTS -->
+        <div id="tab-workouts" class="tab-content active">
+            <div class="tr-banner" id="trBanner">
+                <h3>TrainerRoad Today</h3>
+                <p id="trTodayText">Offline / Simulated Sync Active</p>
+            </div>
+
+            <div class="deload-banner" id="deloadBanner">
+                <h3>Recovery Week Active</h3>
+                <p>Heavy gym lifting is paused this week. Focus on easy mobility, sleep, and absorption of endurance volume. Core routines can be done at 50% effort.</p>
+            </div>
+
+            <div class="toggle-container">
+                <label for="coreRoutineSelect">Active Core / Activation Routine:</label>
+                <select id="coreRoutineSelect" onchange="switchCoreRoutine(this.value)" style="width: auto; padding: 6px 10px; font-weight: 600;">
+                    <option value="routine1">Routine 1 (Plank & Stability Series)</option>
+                    <option value="routine2">Routine 2 (Dynamic Core & Rotation)</option>
+                </select>
+            </div>
+
+            <div class="session-tabs">
+                <div class="session-tab active" onclick="switchSession(1)" id="stab-1">Session 1 (Mon)</div>
+                <div class="session-tab" onclick="switchSession(2)" id="stab-2">Session 2 (Tue)</div>
+                <div class="session-tab" onclick="switchSession(3)" id="stab-3">Session 3 (Thu)</div>
+            </div>
+
+            <div id="workoutContainer">
+                <div class="card"><p>Loading workouts configuration...</p></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: WEEKLY PLAN -->
+        <div id="tab-weekly" class="tab-content">
+            <div class="card">
+                <h2>Weekly Structure</h2>
+                <p>Optimized for 3 deadlift-free strength sessions integrated with your TrainerRoad bike/run plan.</p>
+                <div id="weeklyPlanContainer"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ROADMAP -->
+        <div id="tab-roadmap" class="tab-content">
+            <div class="card">
+                <h2>8-Month Periodization Roadmap</h2>
+                <p>Progression leading up to Outlaw Triathlon July 2027.</p>
+                <div class="roadmap-month">
+                    <h3>Winter Base (Nov - Jan)</h3>
+                    <p>Build unilateral stability, posterior chain resilience, and upper back posture. 3 strength sessions/week.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Spring Build (Feb - Apr)</h3>
+                    <p>Transition to 2 strength sessions/week. Focus on force transfer and knee/ankle durability for long runs.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Specialty & Peak (May - Jun)</h3>
+                    <p>Maintenance mode (1-2 short sessions/week). Prioritize race-pace specificity, taper freshness, and recovery.</p>
+                </div>
+                <div class="roadmap-month">
+                    <h3>Race Month (July 2027)</h3>
+                    <p>Outlaw Race execution. Zero heavy lifting in race week; mobility & activation only.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: VIDEOS -->
+        <div id="tab-videos" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <h2 style="margin:0;">Training Video Library</h2>
+                    <a href="https://drive.google.com/drive/folders/1xgV_yxiyzNLju992_SZKCOxVmvLFisMX?usp=drive_link" target="_blank" rel="noopener" class="btn">Open Root Folder ↗</a>
+                </div>
+                <p>Track your watched videos with persistent local storage. Click any video to mark it done.</p>
+                <div id="videoHierarchyContainer">
+                    <p>Loading video library structure...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: SETTINGS -->
+        <div id="tab-settings" class="tab-content">
+            <div class="card">
+                <h2>Gym Strength Days</h2>
+                <p>Configure which days of the week you perform your 3 strength sessions.</p>
+                <div class="form-group">
+                    <label for="gymDay1">Session 1 Day</label>
+                    <select id="gymDay1" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option><option value="Tuesday">Tuesday</option><option value="Wednesday">Wednesday</option><option value="Thursday">Thursday</option><option value="Friday">Friday</option><option value="Saturday">Saturday</option><option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gymDay2">Session 2 Day</label>
+                    <select id="gymDay2" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option><option value="Tuesday">Tuesday</option><option value="Wednesday">Wednesday</option><option value="Thursday">Thursday</option><option value="Friday">Friday</option><option value="Saturday">Saturday</option><option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gymDay3">Session 3 Day</label>
+                    <select id="gymDay3" onchange="saveGymDays()">
+                        <option value="Monday">Monday</option><option value="Tuesday">Tuesday</option><option value="Wednesday">Wednesday</option><option value="Thursday">Thursday</option><option value="Friday">Friday</option><option value="Saturday">Saturday</option><option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Data & Sync</h2>
+                <p>Manage app cache, rest timer settings, and offline fallback simulation.</p>
+                <div class="form-group">
+                    <label for="icsUrl">TrainerRoad ICS URL / Calendar Feed</label>
+                    <input type="text" id="icsUrl" placeholder="https://app.trainerroad.com/calendar/..." onchange="saveICSUrl()">
+                </div>
+                <button class="btn" onclick="syncCalendar()">Sync Now (Simulated Fallback)</button>
+                <button class="btn btn-secondary" onclick="resetAppData()" style="margin-left: 8px;">Reset Progress</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rest Timer Floating Bar -->
+    <div class="timer-bar" id="timerBar">
+        <div class="timer-info">
+            <div>
+                <div class="timer-label" id="timerLabel">Rest Timer</div>
+                <div class="timer-display" id="timerDisplay">01:30</div>
+            </div>
+        </div>
+        <div class="timer-actions">
+            <button class="btn btn-secondary" onclick="adjustTimer(-15)">-15s</button>
+            <button class="btn" onclick="adjustTimer(15)">+15s</button>
+            <button class="btn btn-secondary" onclick="stopTimer()">Stop</button>
+        </div>
+    </div>
+
+    <!-- Interactive Core Routine Modal -->
+    <div class="routine-modal" id="routineModal">
+        <div class="routine-modal-card">
+            <div class="routine-status-badge" id="routineStatusBadge">Working Set</div>
+            <div class="routine-current-name" id="routineCurrentName">Front plank</div>
+            <div class="routine-timer-display" id="routineTimerDisplay">01:00</div>
+            <div class="routine-next-preview" id="routineNextPreview">Next: Side plank (Left)</div>
+            <div class="routine-modal-controls">
+                <button class="btn btn-secondary" onclick="pauseRoutineTimer()" id="routinePauseBtn">Pause</button>
+                <button class="btn" onclick="skipRoutineStep()">Skip</button>
+                <button class="btn btn-secondary" onclick="closeRoutineModal()">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('workouts', this)">Workouts</button>
+        <button class="nav-item" onclick="switchTab('weekly', this)">Weekly Plan</button>
+        <button class="nav-item" onclick="switchTab('roadmap', this)">Roadmap</button>
+        <button class="nav-item" onclick="switchTab('videos', this)">Videos</button>
+        <button class="nav-item" onclick="switchTab('settings', this)">Settings</button>
+    </nav>
+
+    <!-- Scripts: Load data files first, then app logic -->
+    <script src="videoLibrary.js"></script>
+    <script src="workouts.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
